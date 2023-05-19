@@ -1,0 +1,17 @@
+{
+  "name": "amtdirectcypress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress run",
+    "Headed": "npx cypress run --browser chrome --headed "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.11.0",
+    "cypress-mochawesome-reporter": "^3.3.0"
+  },
+  "description": ""
+}

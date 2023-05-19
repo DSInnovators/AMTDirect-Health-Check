@@ -1,0 +1,52 @@
+name: Scheduled Health Check
+
+on: 
+  schedule:
+   - cron: '0 */3 * * *'
+
+jobs:
+  environment-health-check:
+    runs-on: ubuntu-latest
+    env: 
+      amt_password: ${{ secrets.AMTPASSWORD }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Run Cypress tests
+        id: cypress
+        run: npx cypress run --env amt_password=$amt_password
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Cypress HTML Report
+          path: /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/reports/html/index.html        
+
+      - name: Send email with results if tests fail
+        if: ${{ failure() }}
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.SENDGRID_USERNAME }}
+          password: ${{ secrets.SENDGRID_PASSWORD }}
+          subject: Environment is down.
+          to: sultan.parvez@dsinnovators.com, fariahricha1301@gmail.com, Faria.Habib@mrisoftware.com, Sultan.Parvez@mrisoftware.com
+          from: noreply@dsinnovators.com
+          body: |
+            Dear Team, This is to inform you that one or multiple environments are currently experiencing an outage. 
+            Please take immediate action to investigate and resolve the issue. Additional information is provided in the attached report. 
+            
+            We apologize for any inconvenience caused and appreciate your prompt attention to this matter. 
+            
+            Regards,
+            QA Team
+            
+          attachments: |
+            /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/reports/html/index.html
+              

@@ -1,0 +1,42 @@
+name: Test Ground
+
+on: [push]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env: 
+      amt_password: ${{ secrets.AMTPASSWORD }}
+
+    steps:
+      - name: Debug environment variable
+        run: echo $amt_password
+        
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        id: cypress
+        run: npx cypress run --env amt_password=$amt_password
+
+      - name: Upload HTML report
+        uses: actions/upload-artifact@v2
+        with:
+          name: Cypress HTML Report
+          path: /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/reports/html/index.html
+          
+      - name: Upload artifact on failure
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v2
+        with:
+          name: Cypress Failure Artifact
+          path: /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/videos/Runner.cy.js.mp4
+
+
+
+
+
+

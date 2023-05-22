@@ -2,7 +2,7 @@ name: Scheduled Health Check
 
 on: 
   schedule:
-   - cron: '0 */3 * * *'
+   - cron: '*/5 * * * *'
 
 jobs:
   environment-health-check:
@@ -28,7 +28,7 @@ jobs:
           path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html        
 
       - name: Send email with results if tests fail
-        if: ${{ failure() }}
+        if: ${{ success() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com

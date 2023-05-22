@@ -36,8 +36,8 @@ jobs:
           username: ${{ secrets.SENDGRID_USERNAME }}
           password: ${{ secrets.SENDGRID_PASSWORD }}
           subject: Environment is down.
-          to: sultan.parvez@dsinnovators.com, fariahricha1301@gmail.com, Faria.Habib@mrisoftware.com, Sultan.Parvez@mrisoftware.com
-          from: noreply@dsinnovators.com
+          to: fariahricha1301@gmail.com, Faria.Habib@mrisoftware.com, Sultan.Parvez@mrisoftware.com
+          from: QA AMTDirect
           body: |
             Dear Team, This is to inform you that one or multiple environments are currently experiencing an outage. 
             Please take immediate action to investigate and resolve the issue. Additional information is provided in the attached report. 

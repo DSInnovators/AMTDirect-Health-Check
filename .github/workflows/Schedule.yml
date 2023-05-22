@@ -2,7 +2,7 @@ name: Scheduled Health Check
 
 on: 
   schedule:
-   - cron: '*/5 * * * *'
+   - cron: '0 */2 * * *'
 
 jobs:
   environment-health-check:
@@ -28,14 +28,14 @@ jobs:
           path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html        
 
       - name: Send email with results if tests fail
-        if: ${{ success() }}
+        if: ${{ failure() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 587
           username: ${{ secrets.SENDGRID_USERNAME }}
           password: ${{ secrets.SENDGRID_PASSWORD }}
-          subject: Environment is down.
+          subject: [ALERT] AMTDirect Environment Inaccessible
           to: kaylin.kilby@mrisoftware.com, christy.kisiah@mrisoftware.com, amanda.ramjohn@mrisoftware.com, aj.babcock@mrisoftware.com, preston.rockholt@mrisoftware.com, asad.udaipurwala@mrisoftware.com, richard.reynolds@mrisoftware.com, tien.nguyen@mrisoftware.com
           cc: qa.amtdirect@dsinnovators.com
           from: QA AMTDirect
@@ -43,6 +43,8 @@ jobs:
            Dear Team, 
 
            This is an automated email to inform you that one or multiple environments may be inaccessible. Additional information are provided in the attached report.
+
+           NOTE: Please download the HTML file for viewing it.
 
            Regards,
            QA Team

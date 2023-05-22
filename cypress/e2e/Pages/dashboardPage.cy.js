@@ -3,7 +3,7 @@ export class DashboardPage {
 
     }
     assertDashboardText() {
-        if (!cy.get('.actwve').should('be.visible')) {
+        if (!cy.get('.active').should('be.visible')) {
             throw new Error('Login Failed');
         }
     }

@@ -2,7 +2,7 @@ name: Scheduled Health Check
 
 on: 
   schedule:
-   - cron: '*/5 * * * *'
+   - cron: '0 */3 * * *'
 
 jobs:
   environment-health-check:
@@ -36,7 +36,8 @@ jobs:
           username: ${{ secrets.SENDGRID_USERNAME }}
           password: ${{ secrets.SENDGRID_PASSWORD }}
           subject: Environment is down.
-          to: fariahricha1301@gmail.com, Faria.Habib@mrisoftware.com, Sultan.Parvez@mrisoftware.com, sanjoy.mitra@dsinnovators.com
+          to: kaylin.kilby@mrisoftware.com, christy.kisiah@mrisoftware.com, amanda.ramjohn@mrisoftware.com, aj.babcock@mrisoftware.com, preston.rockholt@mrisoftware.com, asad.udaipurwala@mrisoftware.com, richard.reynolds@mrisoftware.com, tien.nguyen@mrisoftware.com
+          cc: qa.amtdirect@dsinnovators.com
           from: QA AMTDirect
           body: |
            Dear Team, 

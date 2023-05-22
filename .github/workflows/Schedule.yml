@@ -25,10 +25,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Cypress HTML Report
-          path: /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/reports/html/index.html        
+          path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html        
 
       - name: Send email with results if tests fail
-        if: ${{ success() }}
+        if: ${{ failure() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -48,5 +48,5 @@ jobs:
             QA Team
             
           attachments: |
-            /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/reports/html/index.html
+            /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html
               

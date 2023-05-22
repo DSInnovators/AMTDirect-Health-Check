@@ -28,7 +28,7 @@ jobs:
           path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html        
 
       - name: Send email with results if tests fail
-        if: ${{ success() }}
+        if: ${{ failure() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
@@ -36,16 +36,15 @@ jobs:
           username: ${{ secrets.SENDGRID_USERNAME }}
           password: ${{ secrets.SENDGRID_PASSWORD }}
           subject: Environment is down.
-          to: fariahricha1301@gmail.com, Faria.Habib@mrisoftware.com, Sultan.Parvez@mrisoftware.com
+          to: fariahricha1301@gmail.com, Faria.Habib@mrisoftware.com, Sultan.Parvez@mrisoftware.com, sanjoy.mitra@dsinnovators.com
           from: QA AMTDirect
           body: |
-            Dear Team, This is to inform you that one or multiple environments are currently experiencing an outage. 
-            Please take immediate action to investigate and resolve the issue. Additional information is provided in the attached report. 
-            
-            We apologize for any inconvenience caused and appreciate your prompt attention to this matter. 
-            
-            Regards,
-            QA Team
+           Dear Team, 
+
+           This is an automated email to inform you that one or multiple environments may be inaccessible. Additional information are provided in the attached report.
+
+           Regards,
+           QA Team
             
           attachments: |
             /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html

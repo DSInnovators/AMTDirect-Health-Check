@@ -26,14 +26,14 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Cypress HTML Report
-          path: /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/reports/html/index.html
+          path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html
           
       - name: Upload artifact on failure
         if: ${{ failure() }}
         uses: actions/upload-artifact@v2
         with:
           name: Cypress Failure Artifact
-          path: /home/runner/work/AutomatedLoginTest/AutomatedLoginTest/cypress/videos/Runner.cy.js.mp4
+          path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/videos/Runner.cy.js.mp4
 
 
 

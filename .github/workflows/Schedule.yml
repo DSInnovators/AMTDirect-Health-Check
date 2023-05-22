@@ -2,7 +2,7 @@ name: Scheduled Health Check
 
 on: 
   schedule:
-   - cron: '0 */2 * * *'
+   - cron: '*/5 * * * *'
 
 jobs:
   environment-health-check:
@@ -28,14 +28,14 @@ jobs:
           path: /home/runner/work/AMTDirect-Health-Check/AMTDirect-Health-Check/cypress/reports/html/index.html        
 
       - name: Send email with results if tests fail
-        if: ${{ failure() }}
+        if: ${{ success() }}
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 587
           username: ${{ secrets.SENDGRID_USERNAME }}
           password: ${{ secrets.SENDGRID_PASSWORD }}
-          subject: [ALERT] AMTDirect Environment Inaccessible
+          subject: ALERT - AMTDirect Environment Inaccessible
           to: kaylin.kilby@mrisoftware.com, christy.kisiah@mrisoftware.com, amanda.ramjohn@mrisoftware.com, aj.babcock@mrisoftware.com, preston.rockholt@mrisoftware.com, asad.udaipurwala@mrisoftware.com, richard.reynolds@mrisoftware.com, tien.nguyen@mrisoftware.com
           cc: qa.amtdirect@dsinnovators.com
           from: QA AMTDirect
